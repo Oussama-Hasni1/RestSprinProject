@@ -22,22 +22,11 @@ public class RestSpringProjectApplication implements CommandLineRunner {
     CentreRepository centreRepository;
     @Override
     public void run(String... args) throws Exception {
-        Etudiant et1=Etudiant.builder()
-                .nom("Adnani")
-                .prenom("Morad")
-                .genre(Genre.Male)
-                .build();
-        etudiantRepository.save(et1);
-        Etudiant et2=Etudiant.builder()
-                .nom("Adnani")
-                .prenom("samira")
-                .genre(Genre.Female)
-                .build();
-        etudiantRepository.save(et2);
+
 
         Centre ctr1=Centre.builder()
                 .nom("Centre Maarif")
-                .adress("Maarif")
+                .adress("Biranzarane")
                 .build();
         centreRepository.save(ctr1);
 
@@ -47,6 +36,19 @@ public class RestSpringProjectApplication implements CommandLineRunner {
                 .build();
         centreRepository.save(ctr2);
 
-
+        Etudiant et1=Etudiant.builder()
+                .nom("Adnani")
+                .prenom("Morad")
+                .genre(Genre.Male)
+                .centre(ctr1)
+                .build();
+        etudiantRepository.save(et1);
+        Etudiant et2=Etudiant.builder()
+                .nom("Adnani")
+                .prenom("samira")
+                .genre(Genre.Female)
+                .centre(ctr2)
+                .build();
+        etudiantRepository.save(et2);
     }
 }
