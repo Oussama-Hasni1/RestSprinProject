@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path = "Centres")
-public interface CentreRepository extends JpaRepository<Centre,Long> {
+public interface CentreRepository extends JpaRepository<Centre,Integer> {
     Centre findCentreByNom(@Param("nom") String nom);
 }

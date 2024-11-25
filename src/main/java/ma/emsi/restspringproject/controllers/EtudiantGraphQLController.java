@@ -1,9 +1,11 @@
 package ma.emsi.restspringproject.controllers;
 
+import ma.emsi.restspringproject.dto.EtudiantDTO;
 import ma.emsi.restspringproject.model.Centre;
 import ma.emsi.restspringproject.model.Etudiant;
 import ma.emsi.restspringproject.repository.CentreRepository;
 import ma.emsi.restspringproject.repository.EtudiantRepository;
+import ma.emsi.restspringproject.services.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -11,37 +13,37 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EtudiantGraphQLController {
     @Autowired
-    private EtudiantRepository etudiantRepository;
-    @Autowired
-    private CentreRepository centreRepository;
+    private EtudiantService etudiantService;
 
     @QueryMapping
-    public List<Etudiant> listEtudiants() {
-        return etudiantRepository.findAll();
+    public List<Etudiant> getAllEtudiants() {
+        return etudiantService.getAllEtudiants();
     }
 
     @QueryMapping
-    public Etudiant getEtudiantById(@Argument Long id) {
-        return etudiantRepository.findById(id).orElseThrow(
-                () -> new RuntimeException(String.format("etudiant %d non trouvé ", id))
-        );
+    public Optional<Etudiant> getEtudiantById(@Argument int id) {
+        return etudiantService.getEtudiantById(id);
     }
 
-    @QueryMapping
-    public List<Centre> centres() {
-        return centreRepository.findAll();
+    @MutationMapping
+    public Etudiant createEtudiant(@Argument("input") EtudiantDTO etudiantDTO) {
+        return etudiantService.createEtudiant(etudiantDTO);
     }
 
-    @QueryMapping
-    public Centre getCentreById(@Argument Long id) {
-        return centreRepository.findById(id).orElseThrow(
-                () -> new RuntimeException(String.format("Centre %s non trouvé ", id))
-        );
+    @MutationMapping
+    public Etudiant modifyEtudiant(@Argument EtudiantDTO etudiantDTO) {
+
+        return etudiantService.modifyEtudiant(etudiantDTO);
     }
 
+    @MutationMapping
+    public boolean deleteEtudiant(@Argument int id) {
+        return etudiantService.deleteEtudiant(id);
+    }
 
 }

@@ -1,19 +1,49 @@
-type Query{
-    listEtudiants : [Etudiant]
-    getEtudiantById(id:Float):Etudiant
-    centres:[Centre]
-    getCentreById(id:Float):Centre
-}
-type Etudiant{
-    id:Float
-    nom:String
-    prenom:String
-    genre:String
-    centre:Centre
-}
-type Centre{
-    id:Int
+type Centre {
+    id: ID
     nom: String
-    adress:String
-    listEtudiants:[Etudiant]
+    adresse: String
+    etudiants: [Etudiant]
+}
+
+type Etudiant {
+    id: ID
+    nom: String
+    prenom: String
+    genre: Genre
+    centre: Centre
+}
+
+enum Genre {
+    Homme
+    Femme
+    King
+    Alien
+    Hmmar
+}
+
+input EtudiantDTO {
+    id: ID
+    nom: String
+    prenom: String
+    genre: Genre
+    centreId: ID
+}
+
+type Query {
+    getAllCentres: [Centre]
+    getCentreById(id: ID): Centre
+    getAllEtudiants: [Etudiant]
+    getEtudiantById(id: ID): Etudiant
+}
+
+type Mutation {
+    # Centre Mutations
+    createCentre(nom: String, adresse: String): Centre
+    modifyCentre(id: ID, nom: String, adresse: String): Centre
+    deleteCentre(id: ID): Boolean
+
+    # Etudiant Mutations
+    createEtudiant(input: EtudiantDTO): Etudiant
+    modifyEtudiant(input: EtudiantDTO): Etudiant
+    deleteEtudiant(id: ID): Boolean
 }

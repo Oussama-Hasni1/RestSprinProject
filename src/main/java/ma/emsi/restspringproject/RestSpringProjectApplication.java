@@ -39,14 +39,14 @@ public class RestSpringProjectApplication implements CommandLineRunner {
         Etudiant et1=Etudiant.builder()
                 .nom("Adnani")
                 .prenom("Morad")
-                .genre(Genre.Male)
+                .genre(Genre.Homme)
                 .centre(ctr1)
                 .build();
         etudiantRepository.save(et1);
         Etudiant et2=Etudiant.builder()
                 .nom("Adnani")
                 .prenom("samira")
-                .genre(Genre.Female)
+                .genre(Genre.Femme)
                 .centre(ctr2)
                 .build();
         etudiantRepository.save(et2);

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @RepositoryRestResource(path = "students")
-public interface EtudiantRepository extends JpaRepository<Etudiant,Long> {
+public interface EtudiantRepository extends JpaRepository<Etudiant,Integer> {
     List<Etudiant> findEtudiantsByNom(@Param("nom")String nom);
 }

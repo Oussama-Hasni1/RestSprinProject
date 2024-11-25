@@ -18,7 +18,7 @@ import java.util.List;
 public class Centre  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    int id;
     @Column(name="nom_centre", nullable=false)
     String nom;
     @Column(name="adress_centre")

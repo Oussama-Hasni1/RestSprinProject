@@ -14,7 +14,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 public class Etudiant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    int id;
     @Column(name="nom_etudiant", nullable=false)
     String nom;
     @Column(name="prenom_etudiant")
